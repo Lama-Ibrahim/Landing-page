@@ -1,3 +1,22 @@
+// Safety net for form submission if firebase.js fails to load
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('joinForm');
+    const errorBox = document.getElementById('formError');
+
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+        if (!form.getAttribute('data-firebase-ready')) {
+            e.preventDefault();
+            if (errorBox) {
+                errorBox.textContent = 'تعذر تحميل خدمة الإرسال. تحقق من اتصال الإنترنت ومن وحدة التحكم.';
+                errorBox.hidden = false;
+            }
+            console.error('[zaina] form submitted but firebase.js was not loaded');
+        }
+    });
+});
+
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
