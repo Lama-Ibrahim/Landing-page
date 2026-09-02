@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدعم الفني | zaina</title>
+    <meta name="description" content="مركز دعم زينة للعميلات وخبيرات التجميل: أسئلة شائعة، الحجوزات، والمدفوعات، وطرق التواصل مع الفريق.">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/logo.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .navbar-link.is-current {
+            color: var(--brand-purple);
+        }
+
+        .navbar-link.is-current::after {
+            width: 100%;
+        }
+
+        .support-page {
+            padding: 140px 20px 80px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .support-hero {
+            max-width: 960px;
+            margin: 0 auto 28px;
+            text-align: center;
+        }
+
+        .support-hero .legal-title {
+            margin-bottom: 12px;
+        }
+
+        .support-hero .legal-intro {
+            margin-bottom: 0;
+        }
+
+        .support-shell {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .support-search {
+            position: relative;
+            margin: 0 0 20px;
+        }
+
+        .support-search input {
+            width: 100%;
+            padding: 16px 20px 16px 48px;
+            border: 1px solid rgba(152, 132, 180, 0.2);
+            border-radius: 18px;
+            background: var(--white);
+            font-family: inherit;
+            font-size: 16px;
+            color: var(--text-dark);
+            box-shadow: 0 12px 40px rgba(60, 40, 90, 0.06);
+        }
+
+        .support-search input:focus {
+            outline: none;
+            border-color: var(--brand-purple);
+            box-shadow: 0 0 0 4px rgba(152, 132, 180, 0.12);
+        }
+
+        .support-search svg {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--brand-purple);
+            pointer-events: none;
+        }
+
+        .audience-switch {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .audience-btn,
+        .chip {
+            border: 1px solid rgba(152, 132, 180, 0.18);
+            background: var(--white);
+            color: var(--text-gray);
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .audience-btn {
+            min-width: 150px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .audience-btn.is-active,
+        .chip.is-active {
+            background: var(--brand-purple-gradient);
+            color: var(--white);
+            border-color: transparent;
+            box-shadow: var(--shadow-purple);
+        }
+
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .chip {
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(60, 40, 90, 0.04);
+        }
+
+        .faq-item[hidden] {
+            display: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 20px 22px;
+            background: none;
+            border: 0;
+            font-family: inherit;
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .faq-question h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .faq-question p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .faq-chevron {
+            flex-shrink: 0;
+            color: var(--brand-purple);
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item.is-open .faq-chevron {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 22px 20px;
+            color: var(--text-gray);
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .faq-item.is-open .faq-answer {
+            display: block;
+        }
+
+        .faq-empty {
+            display: none;
+            text-align: center;
+            padding: 36px 16px;
+            color: var(--text-gray);
+            background: var(--white);
+            border-radius: 18px;
+            border: 1px dashed rgba(152, 132, 180, 0.3);
+        }
+
+        .faq-empty.is-visible {
+            display: block;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border: 1px solid rgba(152, 132, 180, 0.15);
+            border-radius: 20px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 8px 24px rgba(60, 40, 90, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        a.contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            margin: 10px 0 6px;
+            color: var(--text-dark);
+        }
+
+        .contact-card p {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(152, 132, 180, 0.1);
+            color: var(--brand-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .support-note {
+            margin-top: 28px;
+            padding: 24px 28px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(152, 132, 180, 0.08) 0%, rgba(152, 132, 180, 0.02) 100%);
+            border: 1px solid rgba(152, 132, 180, 0.15);
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .support-note strong {
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .support-page {
+                padding: 100px 16px 56px;
+            }
+
+            .audience-btn {
+                min-width: 0;
+                flex: 1;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-question {
+                padding: 16px 18px;
+            }
+        }
+    </style>
+</head>
+<body class="legal-body">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="navbar-logo">
+                <svg width="32" height="32" viewBox="0 0 100 100" aria-hidden="true">
+                    <path class="petal" d="M 50 50 C 50 35, 35 25, 25 30 C 15 35, 20 50, 25 60 C 30 70, 45 70, 50 50 Z" />
+                    <path class="petal" d="M 50 50 C 65 50, 75 35, 70 25 C 65 15, 50 20, 40 25 C 30 30, 35 45, 50 50 Z" />
+                    <path class="petal" d="M 50 50 C 50 65, 65 75, 75 70 C 85 65, 80 50, 75 40 C 70 30, 55 30, 50 50 Z" />
+                    <path class="petal" d="M 50 50 C 35 50, 25 65, 30 75 C 35 85, 50 80, 60 75 C 70 70, 65 55, 50 50 Z" />
+                </svg>
+                <span class="navbar-brand">zaina</span>
+            </a>
+            <div class="navbar-links">
+                <a href="/#home" class="navbar-link">الرئيسية</a>
+                <a href="/#features" class="navbar-link">من نحن</a>
+                <a href="/support/" class="navbar-link is-current" aria-current="page">الدعم</a>
+                <a href="/#contact" class="navbar-link">تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="support-page">
+        <header class="support-hero">
+            <span class="legal-eyebrow">مركز المساعدة</span>
+            <h1 class="legal-title">الدعم الفني</h1>
+            <p class="legal-intro">
+                إجابات سريعة للعميلات وخبيرات التجميل. إذا لم تجدي ما تبحثين عنه، راسلي الفريق من التطبيق أو من بيانات التواصل أدناه.
+            </p>
+        </header>
+
+        <div class="support-shell">
+            <div class="audience-switch" role="tablist" aria-label="نوع الحساب">
+                <button type="button" class="audience-btn is-active" data-audience="customer" role="tab" aria-selected="true">عميلة</button>
+                <button type="button" class="audience-btn" data-audience="provider" role="tab" aria-selected="false">خبيرة</button>
+            </div>
+
+            <div class="support-search">
+                <label class="visually-hidden" for="faqSearch" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">ابحثي في الأسئلة</label>
+                <input id="faqSearch" type="search" placeholder="ابحثي عن سؤال… مثل إلغاء حجز أو تحويل الأرباح" autocomplete="off">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+
+            <div class="chip-row" id="categoryRow" role="tablist" aria-label="تصنيف الأسئلة"></div>
+
+            <div class="faq-list" id="faqList"></div>
+            <p class="faq-empty" id="faqEmpty">لا توجد نتائج مطابقة. جرّبي كلمة أخرى أو تواصلي مع الدعم.</p>
+
+            <section class="contact-grid" id="contact" aria-label="طرق التواصل">
+                <div class="contact-card">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>محادثة الدعم</h3>
+                    <p>أسرع طريقة: افتحي الدعم من تبويب «المزيد» داخل تطبيق زينة أو منصة الأعمال.</p>
+                </div>
+                <a class="contact-card" href="mailto:info@zaina-app.com">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <h3>البريد</h3>
+                    <p dir="ltr">info@zaina-app.com</p>
+                </a>
+                <a class="contact-card" href="tel:+966500602549">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <h3>الجوال</h3>
+                    <p dir="ltr">+966 50 060 2549</p>
+                </a>
+            </section>
+
+            <p class="support-note">
+                <strong>نصيحة:</strong> عند التواصل أرسلي رقم الحجز أو رقم العملية وتاريخ الموعد. لاستفسارات الخصوصية راسلي
+                <a href="mailto:privacy@zaina-app.com">privacy@zaina-app.com</a>.
+            </p>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col-brand">
+                    <div class="footer-logo">
+                        <svg class="logo-symbol" width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+                            <path class="petal" d="M 50 50 C 50 35, 35 25, 25 30 C 15 35, 20 50, 25 60 C 30 70, 45 70, 50 50 Z" />
+                            <path class="petal" d="M 50 50 C 65 50, 75 35, 70 25 C 65 15, 50 20, 40 25 C 30 30, 35 45, 50 50 Z" />
+                            <path class="petal" d="M 50 50 C 50 65, 65 75, 75 70 C 85 65, 80 50, 75 40 C 70 30, 55 30, 50 50 Z" />
+                            <path class="petal" d="M 50 50 C 35 50, 25 65, 30 75 C 35 85, 50 80, 60 75 C 70 70, 65 55, 50 50 Z" />
+                        </svg>
+                        <span class="footer-brand-name">zaina</span>
+                    </div>
+                    <p class="footer-tagline">
+                        منصة شاملة لخبيرات التجميل لإدارة المواعيد والعملاء والإيرادات.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/zaina-ksa/" target="_blank" rel="noopener noreferrer" class="social-button" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.56V9H3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.74v20.52C0 23.22.79 24 1.77 24h20.45c.99 0 1.78-.78 1.78-1.74V1.74C24 .78 23.21 0 22.22 0z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@zaina-app" target="_blank" rel="noopener noreferrer" class="social-button" aria-label="TikTok">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.69a8.16 8.16 0 0 0 4.77 1.52V6.74a4.85 4.85 0 0 1-1.84-.05z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">المعلومات القانونية</h4>
+                    <ul class="footer-links">
+                        <li><a href="/terms/">شروط الاستخدام</a></li>
+                        <li><a href="/privacy/">سياسة الخصوصية</a></li>
+                        <li><a href="/refund/">الإلغاء والاسترداد</a></li>
+                        <li><a href="/cookies/">سياسة ملفات الارتباط</a></li>
+                        <li><a href="/support/">الدعم الفني</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">تواصل معنا</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span class="footer-contact-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </span>
+                            <a href="tel:+966500602549" dir="ltr">+966 50 060 2549</a>
+                        </li>
+                        <li>
+                            <span class="footer-contact-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </span>
+                            <a href="mailto:info@zaina-app.com" dir="ltr">info@zaina-app.com</a>
+                        </li>
+                        <li>
+                            <span class="footer-contact-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </span>
+                            <span>جدة، المملكة العربية السعودية</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-text">© 2026 zaina. جميع الحقوق محفوظة.</p>
+                <p class="footer-credit">
+                    <a href="https://corebit-tech.com" target="_blank" rel="noopener noreferrer" class="footer-credit-link">CoreBit</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const FAQ = {
+            customer: {
+                labels: { account: "حسابي", booking: "الحجوزات", payment: "المدفوعات" },
+                items: [
+                    {
+                        cat: "account",
+                        q: "تسجيل الدخول",
+                        hint: "لا أستطيع الدخول إلى حسابي",
+                        a: "تأكدي من إدخال رقم الجوال المسجّل في زينة. إذا استمرت المشكلة، أعيدي تشغيل التطبيق أو تواصلي مع الدعم من داخل التطبيق."
+                    },
+                    {
+                        cat: "account",
+                        q: "تحديث بياناتي",
+                        hint: "كيف أحدّث اسمي أو رقمي؟",
+                        a: "يمكنكِ تعديل بياناتك من «بياناتي الشخصية» داخل التطبيق. تغيير رقم الجوال يحتاج إعادة التحقق."
+                    },
+                    {
+                        cat: "account",
+                        q: "حذف الحساب",
+                        hint: "كيف أحذف حسابي؟",
+                        a: "من الإعدادات اختاري حذف الحساب. سيتم تسجيل خروجكِ فوراً. السجلات والمواعيد تبقى لدى النشاط، والتسجيل لاحقاً بنفس الرقم ينشئ حساباً جديداً."
+                    },
+                    {
+                        cat: "booking",
+                        q: "متابعة حجزي",
+                        hint: "أين أرى مواعيدي؟",
+                        a: "كل المواعيد القادمة والسابقة وحالة الدفع تظهر في تبويب «المواعيد» داخل التطبيق."
+                    },
+                    {
+                        cat: "booking",
+                        q: "إلغاء موعد",
+                        hint: "كيف ألغي حجزي؟",
+                        a: "بعد تأكيد الحجز قد لا يظهر زر إلغاء داخل التطبيق. افتحي الموعد ثم المحادثة واطلبي الإلغاء من الخبيرة. إذا احتجتِ تدخلاً إضافياً، تواصلي مع الدعم من التطبيق واذكري رقم الحجز."
+                    },
+                    {
+                        cat: "booking",
+                        q: "تغيير الموعد",
+                        hint: "كيف أغيّر تاريخ أو وقت الحجز؟",
+                        a: "تغيير الموعد يتم عبر فريق زينة. راسلي الدعم من التطبيق واذكري اسم الخبيرة، موعدك الحالي، والموعد الجديد الذي يناسبك."
+                    },
+                    {
+                        cat: "payment",
+                        q: "العربون والاسترداد",
+                        hint: "متى يُسترد المبلغ؟",
+                        a: "تفاصيل العربون تظهر قبل إتمام الدفع. عند الإلغاء من جهتكِ غالباً لا يُسترد العربون، وقد يُعاد ما زاد عنه إلى نفس وسيلة الدفع بعد مراجعة الدعم. إذا أُلغي الحجز من الخبيرة أو من زينة ولم تُنفَّذ الخدمة، يُراجع الاسترداد بالكامل. راجعي شروط الاستخدام أو اطلبي التوضيح من الدعم."
+                    },
+                    {
+                        cat: "payment",
+                        q: "فشل الدفع",
+                        hint: "لم يكتمل الدفع أو لم يظهر الاسترداد",
+                        a: "تأكدي من رصيد البطاقة أو Apple Pay ثم أعيدي المحاولة. إذا خُصم المبلغ دون تأكيد الحجز، راسلي الدعم برقم العملية وتاريخها. الاسترداد — عند استحقاقه — يعود عادة إلى نفس وسيلة الدفع خلال عدة أيام عمل."
+                    }
+                ]
+            },
+            provider: {
+                labels: { account: "الحساب", booking: "الحجوزات", payment: "المدفوعات", services: "الخدمات", tech: "تقني" },
+                items: [
+                    {
+                        cat: "account",
+                        q: "تسجيل الدخول",
+                        hint: "كيف أدخل إلى حسابي؟",
+                        a: "استخدمي رقم الجوال المسجّل في زينة. إذا واجهتِ مشكلة في الدخول، تأكدي من صحة الرقم ثم أعيدي المحاولة أو تواصلي مع الدعم من المزيد."
+                    },
+                    {
+                        cat: "account",
+                        q: "تحديث بيانات الصالون",
+                        hint: "كيف أحدّث الاسم أو الصور أو الموقع؟",
+                        a: "من «المزيد» ثم إعداد الحساب يمكنكِ تعديل الاسم والصور والموقع وطرق الدفع. احفظي كل قسم بعد التعديل."
+                    },
+                    {
+                        cat: "account",
+                        q: "إضافة موظفة",
+                        hint: "كيف أضيف عضوة للفريق؟",
+                        a: "من إعداد الحساب → الفريق أضيفي موظفة وحددي دورها (مديرة أو موظفة). يمكنكِ لاحقاً تعديل صلاحياتها أو إيقاف حسابها."
+                    },
+                    {
+                        cat: "account",
+                        q: "حذف الحساب",
+                        hint: "كيف أطلب حذف الحساب؟",
+                        a: "من إعداد الحساب في المزيد، آخر صف «حذف الحساب». يختفي الصالون من بحث العميلات. السجلات والمواعيد تبقى لدى النشاط."
+                    },
+                    {
+                        cat: "booking",
+                        q: "تأكيد أو رفض حجز",
+                        hint: "كيف أتعامل مع حجز جديد؟",
+                        a: "من تبويب الجدول اضغطي على الحجز وغيّري حالته إلى مؤكد أو مرفوض. العميلة تتلقى إشعاراً بالتحديث."
+                    },
+                    {
+                        cat: "booking",
+                        q: "إلغاء أو عدم حضور",
+                        hint: "كيف ألغي حجزاً أو أسجّل عدم حضور؟",
+                        a: "افتحي تفاصيل الحجز واختاري الحالة المناسبة. إلغاء حجز مؤكد في ظروف خاصة يتم عبر الدعم بعد المراجعة. تأكدي من السياسة قبل الإلغاء المتأخر."
+                    },
+                    {
+                        cat: "booking",
+                        q: "تغيير موعد",
+                        hint: "هل يمكن سحب الموعد في الجدول؟",
+                        a: "لا يُعاد جدولة الحجز بسحب البطاقة على التقويم. لطلب تغيير وقت حجز قائم تواصلي مع الدعم مع رقم الحجز. المواعيد الجديدة تُنشأ من خانة فارغة في الجدول."
+                    },
+                    {
+                        cat: "payment",
+                        q: "تحويل الأرباح",
+                        hint: "متى يصل التحويل البنكي؟",
+                        a: "تُحوَّل الأرباح إلى حسابكِ البنكي عبر بوابة الدفع Tap وفق سياستهم ومددهم. راجعي حالة الحجوزات من المبيعات."
+                    },
+                    {
+                        cat: "payment",
+                        q: "فشل الدفع أو التحويل",
+                        hint: "لم يظهر المبلغ أو فشلت العملية",
+                        a: "راجعي الحجز في المبيعات وتأكدي من تسجيل السعر النهائي. إن استمرت المشكلة أرسلي لفريق الدعم رقم الحجز وتاريخه."
+                    },
+                    {
+                        cat: "services",
+                        q: "إضافة خدمة",
+                        hint: "كيف أضيف خدمة جديدة؟",
+                        a: "من المزيد → الخدمات أضيفي الاسم والمدة والسعر ثم احفظي. تظهر للعميلات بعد التفعيل."
+                    },
+                    {
+                        cat: "services",
+                        q: "ساعات العمل والإجازات",
+                        hint: "كيف أضبط أوقات الاستقبال؟",
+                        a: "من إعدادات الحساب حددي أوقات العمل الأسبوعية وفترات الإغلاق. الحجوزات الجديدة تلتزم بهذه الأوقات تلقائياً."
+                    },
+                    {
+                        cat: "tech",
+                        q: "التطبيق لا يفتح",
+                        hint: "توقف مفاجئ أو شاشة بيضاء",
+                        a: "حدّثي التطبيق من المتجر، أعيدي تشغيل الجهاز، وتأكدي من الإنترنت. إن استمرت المشكلة أرسلي نوع الجهاز وإصدار النظام للدعم."
+                    },
+                    {
+                        cat: "tech",
+                        q: "الإشعارات لا تصل",
+                        hint: "لا أتلقى تنبيهات الحجوزات",
+                        a: "فعّلي إشعارات التطبيق من إعدادات الجهاز، وتأكدي أن وضع عدم الإزعاج مغلق. على أندرويد تحققي من عدم تقييد التطبيق في الخلفية."
+                    }
+                ]
+            }
+        };
+
+        const state = {
+            audience: location.hash === "#provider" ? "provider" : "customer",
+            category: "all",
+            query: ""
+        };
+
+        const faqList = document.getElementById("faqList");
+        const faqEmpty = document.getElementById("faqEmpty");
+        const categoryRow = document.getElementById("categoryRow");
+        const searchInput = document.getElementById("faqSearch");
+
+        function renderCategories() {
+            const labels = FAQ[state.audience].labels;
+            const chips = [["all", "الكل"], ...Object.entries(labels)];
+            categoryRow.innerHTML = chips.map(([id, label]) => (
+                `<button type="button" class="chip${state.category === id ? " is-active" : ""}" data-cat="${id}">${label}</button>`
+            )).join("");
+        }
+
+        function visibleItems() {
+            const q = state.query.trim();
+            return FAQ[state.audience].items.filter((item) => {
+                const catOk = state.category === "all" || item.cat === state.category;
+                const text = `${item.q} ${item.hint} ${item.a}`;
+                const queryOk = !q || text.includes(q);
+                return catOk && queryOk;
+            });
+        }
+
+        function renderFaqs() {
+            const items = visibleItems();
+            faqList.innerHTML = items.map((item, index) => `
+                <article class="faq-item" data-index="${index}">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>
+                            <h3>${item.q}</h3>
+                            <p>${item.hint}</p>
+                        </span>
+                        <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">${item.a}</div>
+                </article>
+            `).join("");
+            faqEmpty.classList.toggle("is-visible", items.length === 0);
+        }
+
+        function setAudience(audience) {
+            state.audience = audience;
+            state.category = "all";
+            document.querySelectorAll(".audience-btn").forEach((btn) => {
+                const active = btn.dataset.audience === audience;
+                btn.classList.toggle("is-active", active);
+                btn.setAttribute("aria-selected", String(active));
+            });
+            history.replaceState(null, "", audience === "provider" ? "#provider" : "#customer");
+            renderCategories();
+            renderFaqs();
+        }
+
+        document.querySelectorAll(".audience-btn").forEach((btn) => {
+            btn.addEventListener("click", () => setAudience(btn.dataset.audience));
+        });
+
+        categoryRow.addEventListener("click", (event) => {
+            const chip = event.target.closest("[data-cat]");
+            if (!chip) return;
+            state.category = chip.dataset.cat;
+            renderCategories();
+            renderFaqs();
+        });
+
+        faqList.addEventListener("click", (event) => {
+            const button = event.target.closest(".faq-question");
+            if (!button) return;
+            const item = button.closest(".faq-item");
+            const open = item.classList.contains("is-open");
+            faqList.querySelectorAll(".faq-item").forEach((el) => {
+                el.classList.remove("is-open");
+                el.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+            });
+            if (!open) {
+                item.classList.add("is-open");
+                button.setAttribute("aria-expanded", "true");
+            }
+        });
+
+        searchInput.addEventListener("input", () => {
+            state.query = searchInput.value;
+            renderFaqs();
+        });
+
+        setAudience(state.audience);
+    </script>
+</body>
+</html>
