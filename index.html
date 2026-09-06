@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zaina - منصة تجمع خبيرات التجميل</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="alternate icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="logo.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +78,8 @@
                     منصة شاملة لخبيرات التجميل لإدارة مواعيدهن، عملائهن، ومبيعاتهن بسهولة وأناقة
                 </p>
                 <div class="cta-buttons">
-                    <a href="#join" class="btn btn-primary">ابدأ الآن</a>
+                    <!-- Production Web App origin: apps/provider-platform NEXT_PUBLIC_APP_ORIGIN -->
+                    <a href="https://business.zaina-app.com" class="btn btn-primary">ابدأ الآن</a>
                     <a href="#features" class="btn btn-secondary">تعرف على المزيد</a>
                 </div>
             </div>
@@ -211,55 +213,6 @@
         </div>
     </section>
 
-    <!-- Early Access Join Section -->
-    <section id="join" class="join-section">
-        <div class="container">
-            <div class="join-content">
-                <h2 class="join-title">انضمي إلى قائمة زينة المبكرة</h2>
-                <p class="join-subtitle">
-                    سجّلي معلوماتك للحصول على وصول مبكر للمنصة قبل الإطلاق الرسمي، عروض خاصة للأعضاء الأوائل، وإشعار فور توفر التطبيق. لن نستخدم بياناتك إلا للتواصل معك بشأن إطلاق زينة.
-                </p>
-
-                <form id="joinForm" class="join-form is-visible" novalidate>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label for="firstName">الاسم الأول <span class="required">*</span></label>
-                            <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
-                        </div>
-                        <div class="form-field">
-                            <label for="lastName">الاسم الأخير <span class="required">*</span></label>
-                            <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
-                        </div>
-                    </div>
-                    <div class="form-field">
-                        <label for="phone">رقم الجوال <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" autocomplete="tel" dir="ltr" placeholder="+966 50 000 0000" required>
-                    </div>
-                    <div class="form-field">
-                        <label for="message">رسالة <span class="optional">(اختياري)</span></label>
-                        <textarea id="message" name="message" rows="3" placeholder="اخبرينا عن صالونك أو خدماتك..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit" id="submitJoin">
-                        <span class="btn-submit-text">انضمي لقائمة زينة المبكرة</span>
-                        <svg class="btn-submit-spinner" width="20" height="20" viewBox="0 0 50 50" aria-hidden="true">
-                            <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="80 200"></circle>
-                        </svg>
-                    </button>
-                    <p class="form-error" id="formError" role="alert" hidden></p>
-                </form>
-
-                <div class="join-success" id="joinSuccess" hidden role="status">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                    <h3>تم التسجيل بنجاح!</h3>
-                    <p>شكراً لانضمامك. سنتواصل معك قريباً جداً.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer id="contact" class="footer">
         <div class="container">
@@ -365,7 +318,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script type="module" src="firebase.js"></script>
 </body>
 </html>
 
