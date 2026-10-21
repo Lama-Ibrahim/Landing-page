@@ -1475,8 +1475,7 @@ body.home .phones {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: clamp(12px, 2vw, 28px);
-    width: min(780px, calc(100% - 32px));
+    width: min(920px, 94%);
     margin: 0 auto;
     padding-top: 12px;
 }
@@ -1493,22 +1492,37 @@ body.home .ph {
     transition: translate 0.45s ease;
 }
 
-body.home .ph,
-body.home .ph--center,
+body.home .ph--center {
+    z-index: 3;
+    width: 332px;
+    height: 670px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.24),
+        0 18px 40px rgba(23, 21, 27, 0.16);
+}
+
 body.home .ph--avail,
 body.home .ph--earn {
     z-index: 1;
-    flex: 1 1 0;
-    width: auto;
-    max-width: 230px;
-    height: auto;
-    aspect-ratio: 1206 / 2622;
-    margin: 0;
-    transform: none;
-    translate: none;
+    width: 228px;
+    height: 484px;
 }
 
-body.home .ph:hover { translate: 0 -8px; }
+body.home .ph--avail {
+    margin-right: 6px;
+    transform: rotate(-3.5deg);
+    translate: 0 42px;
+}
+
+body.home .ph--earn {
+    margin-left: 6px;
+    transform: rotate(3.5deg);
+    translate: 0 42px;
+}
+
+body.home .ph--center:hover { translate: 0 -8px; }
+body.home .ph--avail:hover,
+body.home .ph--earn:hover { translate: 0 34px; }
 body.home .ph--avail .scr-week { padding-right: 46px; }
 body.home .ph--avail .wk-head { text-align: left; padding-left: 16px; padding-right: 8px; }
 body.home .ph--avail .wk-head h3 { font-size: 24px; }
@@ -1585,13 +1599,13 @@ body.home .ph img {
 }
 
 @keyframes ph-left {
-    from { translate: 0 26px; }
-    to { translate: 0 0; }
+    from { translate: 0 64px; }
+    to { translate: 0 42px; }
 }
 
 @keyframes ph-right {
-    from { translate: 0 26px; }
-    to { translate: 0 0; }
+    from { translate: 0 64px; }
+    to { translate: 0 42px; }
 }
 
 body.home .ph-island {
@@ -1768,13 +1782,23 @@ body.home .hero-stage .store-row {
 
 @media (max-width: 1100px) {
     body.home .phones-frame { height: 390px; }
+    body.home .ph--center { width: 268px; height: 542px; }
+    body.home .ph--avail,
+    body.home .ph--earn { width: 184px; height: 392px; }
+    body.home .ph--avail { margin-right: 4px; }
+    body.home .ph--earn { margin-left: 4px; }
 }
 
 @media (max-width: 900px) {
     body.home .hero-intro { padding: 78px 20px 0; }
     body.home .hero-intro h1 { font-size: 32px; }
     body.home .hero-stage { margin-top: 28px; }
-    body.home .phones-frame { height: 340px; }
+    body.home .phones-frame { height: 328px; }
+    body.home .ph--center { width: 188px; height: 400px; }
+    body.home .ph--avail,
+    body.home .ph--earn { width: 128px; height: 292px; }
+    body.home .ph--avail { margin-right: 2px; transform: rotate(-3deg); translate: 0 26px; }
+    body.home .ph--earn { margin-left: 2px; transform: rotate(3deg); translate: 0 26px; }
     body.home .ph--avail .scr-week { padding-right: 16px; }
     body.home .ph--avail .wk-head h3,
     body.home .ph--avail .wk-head p { white-space: nowrap; }
@@ -1784,7 +1808,12 @@ body.home .hero-stage .store-row {
 }
 
 @media (max-width: 640px) {
-    body.home .phones-frame { height: 280px; }
+    body.home .phones-frame { height: 268px; }
+    body.home .ph--center { width: 156px; height: 332px; }
+    body.home .ph--avail,
+    body.home .ph--earn { width: 104px; height: 238px; }
+    body.home .ph--avail { margin-right: 0; transform: rotate(-3deg); translate: 0 18px; }
+    body.home .ph--earn { margin-left: 0; transform: rotate(3deg); translate: 0 18px; }
     body.home .hero-cta { gap: 12px 18px; }
     body.home .live-pill { min-height: 32px; padding: 0 10px; font-size: 12px; }
     body.home .live-panel { width: min(248px, calc(100vw - 32px)); }
