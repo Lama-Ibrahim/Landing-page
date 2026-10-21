@@ -19,13 +19,21 @@ const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
+    if (!navbar) return;
+
+    if (document.body.classList.contains('home')) {
+        navbar.classList.toggle('is-scrolled', currentScroll > 12);
+        lastScroll = currentScroll;
+        return;
+    }
+
     if (currentScroll > 100) {
         navbar.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)';
     } else {
         navbar.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.04)';
     }
-    
+
     lastScroll = currentScroll;
 });
 
@@ -129,3 +137,73 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+if (document.body.classList.contains('home')) {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.navbar-links');
+
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            const open = navLinks.classList.toggle('is-open');
+            navToggle.setAttribute('aria-expanded', String(open));
+        });
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
+    document.querySelectorAll('.faq-trigger').forEach((button) => {
+        button.addEventListener('click', () => {
+            const item = button.closest('.faq-item');
+            const open = item.classList.contains('is-open');
+            document.querySelectorAll('.faq-item').forEach((el) => {
+                el.classList.remove('is-open');
+                el.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+            });
+            if (!open) {
+                item.classList.add('is-open');
+                button.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    const liveButton = document.querySelector('.live-pill');
+    const livePanel = document.querySelector('.live-panel');
+
+    if (liveButton && livePanel) {
+        const setLive = (open) => {
+            liveButton.setAttribute('aria-expanded', String(open));
+            livePanel.hidden = !open;
+        };
+
+        liveButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            setLive(liveButton.getAttribute('aria-expanded') !== 'true');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!liveButton.contains(event.target) && !livePanel.contains(event.target)) {
+                setLive(false);
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') setLive(false);
+        });
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+}
